@@ -1,0 +1,43 @@
+public class HeartShape {
+    public static void main(String[] args) throws InterruptedException {
+        // 爱心的大小（控制宽度和高度）
+        int size = 10;
+        
+        // 上半部分（两个圆弧）
+        for (int y = size; y >= -size; y--) {
+            for (int x = -size * 2; x <= size * 2; x++) {
+                // 爱心的数学方程: (x^2 + y^2 - 1)^3 - x^2 * y^3 = 0
+                // 为了适配控制台字符比例，x 轴方向稍微拉伸
+                double xScaled = x / 2.0;
+                double yVal = y;
+                
+                double equation = Math.pow(Math.pow(xScaled, 2) + Math.pow(yVal, 2) - 1, 3)
+                        - Math.pow(xScaled, 2) * Math.pow(yVal, 3);
+                
+                if (equation <= 0) {
+                    System.out.print("*");
+                } else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+            // 添加一点动画效果：每次打印完一行后暂停一会儿
+            Thread.sleep(50);
+        }
+
+        // 下方添加文字
+        String message = "  Love You  ";
+        System.out.println("\n" + message);
+        
+        // 动态闪烁效果（可选）
+        for (int i = 0; i < 5; i++) {
+            Thread.sleep(300);
+            System.out.print("\r");
+            for (int j = 0; j < message.length(); j++) {
+                System.out.print(" ");
+            }
+            Thread.sleep(300);
+            System.out.print("\r" + message);
+        }
+    }
+}
